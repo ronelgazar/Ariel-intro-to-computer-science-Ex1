@@ -18,12 +18,19 @@ public class Ex1 {
          * @return
          */
         public static int number2Int(String num) {
-            int ans = -1;
-            // add your code here
-
-            ////////////////////
-            return ans;
+            if (!isNumber(num))
+            {
+                return -1;
+            } 
+            String[] parts = num.split("b");
+            int base = getBase(parts[1]);
+            try { //I am using try and catch to catch the exception if the number is not in the correct format
+                return Integer.parseInt(parts[0], base); //This allows me to convert the number to an integer in the given base from getBase function
+            } catch (NumberFormatException e) {
+                return -1;
+            }
         }
+        
         /**
          * This static function checks if the given String (g) is in a valid "number" format.
          * @param a a String representing a number
@@ -64,7 +71,8 @@ public class Ex1 {
 
         
         /* 
-         * This function returns the integer value of the given base.
+         * This function returns the integer value of the given base. 
+         * for example, if the base is 2, the function returns 2. If the base is A, the function returns 10.
          *  If the base is not valid, the function returns -1. (Added this function to avoid code duplication in isNumber function) 
          */
         private static int getBase(String base) {
