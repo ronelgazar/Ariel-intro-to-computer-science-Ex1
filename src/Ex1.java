@@ -113,7 +113,7 @@ public class Ex1 {
             return ans;
         }
 
-        /*
+        /**
          * This function checks if the given base is valid.
          * If the base is not valid, the function returns false. 
          * (Added this function to account for the case where the base is not valid in isNumber function - test)
@@ -122,7 +122,7 @@ public class Ex1 {
             return getBase(base) != -1;
         }
         
-        /*
+        /**
          * This function checks if the given number is valid.
          * If the number is not valid, the function returns false. (Added this function to account for the case where the number is not valid in isNumber function - test)
          */
