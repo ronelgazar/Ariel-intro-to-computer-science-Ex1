@@ -70,7 +70,7 @@ public class Ex1 {
         }
 
         
-        /* 
+        /**
          * This function returns the integer value of the given base. 
          * for example, if the base is 2, the function returns 2. If the base is A, the function returns 10.
          *  If the base is not valid, the function returns -1. (Added this function to avoid code duplication in isNumber function) 
@@ -91,9 +91,32 @@ public class Ex1 {
             return -1;
         }
         
+
+        /** 
+        * Converts a given base value to its corresponding character representation.
+        *The base value to be converted. It should be in the range of 2 to 16.
+        *             - For values between 2 and 9 (inclusive), the char will between will be '2' to '9'.
+        *             - For values between 10 and 16 (inclusive), the char will between be 'A' to 'F'.
+        * The char representation of the base value. If the base is not within the valid range, (' ') is returned.
+        */
+        private static char getBaseChar(int base) {
+            char ans = ' ';
+            if (base >= 2 && base <= 9)
+            {
+                ans = (char) ('0' + base);
+            } 
+            if (base >= 10 && base <= 16)
+            {
+                ans = (char) ('A' + base - 10);
+            } 
+            
+            return ans;
+        }
+
         /*
          * This function checks if the given base is valid.
-         * If the base is not valid, the function returns false. (Added this function to account for the case where the base is not valid in isNumber function - test)
+         * If the base is not valid, the function returns false. 
+         * (Added this function to account for the case where the base is not valid in isNumber function - test)
          */
         private static boolean isValidBase(String base) {
             return getBase(base) != -1;
@@ -123,8 +146,10 @@ public class Ex1 {
          */
         public static String int2Number(int num, int base) {
             String ans = "";
-                    
-
+            if (num < 0 || base < 2 || base > 16) 
+            {
+                ans = Integer.toString(num, base) + "b" + getBaseChar(base);
+            }
             return ans;
         }
 
