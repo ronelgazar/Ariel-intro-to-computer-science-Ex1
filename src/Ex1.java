@@ -161,9 +161,19 @@ public class Ex1 {
          */
         public static boolean equals(String n1, String n2) {
             boolean ans = true;
-            // add your code here
-
-            ////////////////////
+            if (!isNumber(n1) || !isNumber(n2)) 
+            {
+                ans = false;
+            } 
+            else 
+            {
+                int num1 = number2Int(n1);
+                int num2 = number2Int(n2);
+                if (num1 != num2) 
+                {
+                    ans = false;
+                }
+            }
             return ans;
         }
 
@@ -177,9 +187,14 @@ public class Ex1 {
          */
         public static int maxIndex(String[] arr) {
             int ans = 0;
-            // add your code here
-
-            ////////////////////
+            int max = number2Int(arr[0]);
+            for (int i = 1; i < arr.length; i++) {
+                int num = number2Int(arr[i]);
+                if (num > max) {
+                    max = num;
+                    ans = i;
+                }
+            }
             return ans;
         }
 }
