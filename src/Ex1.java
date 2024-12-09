@@ -24,9 +24,12 @@ public class Ex1 {
             } 
             String[] parts = num.split("b");
             int base = getBase(parts[1]);
-            try { //I am using try and catch to catch the exception if the number is not in the correct format
+            try 
+            { //I am using try and catch to catch the exception if the number is not in the correct format
                 return Integer.parseInt(parts[0], base); //This allows me to convert the number to an integer in the given base from getBase function
-            } catch (NumberFormatException e) {
+            } 
+            catch (NumberFormatException e) 
+            {
                 return -1;
             }
         }
@@ -146,10 +149,12 @@ public class Ex1 {
          */
         public static String int2Number(int num, int base) {
             String ans = "";
-            if (num < 0 || base < 2 || base > 16) 
+            if (!(num < 0 || base < 2 || base > 16))
             {
-                ans = Integer.toString(num, base) + "b" + getBaseChar(base);
+                ans = Integer.toString(num, base).toUpperCase() + "b" + getBaseChar(base);
             }
+
+
             return ans;
         }
 
@@ -186,15 +191,15 @@ public class Ex1 {
          *
          */
         public static int maxIndex(String[] arr) {
-            int ans = 0;
-            int max = number2Int(arr[0]);
-            for (int i = 1; i < arr.length; i++) {
-                int num = number2Int(arr[i]);
-                if (num > max) {
-                    max = num;
-                    ans = i;
+            int maxIndex = -1;
+            int maxValue = Integer.MIN_VALUE;
+            for (int i = 0; i < arr.length; i++) {
+                int value = number2Int(arr[i]);
+                if (value > maxValue) {
+                    maxValue = value;
+                    maxIndex = i;
                 }
             }
-            return ans;
+            return maxIndex;
         }
 }
