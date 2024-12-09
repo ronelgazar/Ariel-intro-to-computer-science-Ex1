@@ -28,15 +28,83 @@ public class Ex1 {
          * This static function checks if the given String (g) is in a valid "number" format.
          * @param a a String representing a number
          * @return true iff the given String is in a number format
+         * 
          */
         public static boolean isNumber(String a) {
             boolean ans = true;
-            // add your code here
-
-            ////////////////////
+            if (a == null || a.isEmpty()) 
+            {
+                ans = false;
+            } 
+            else 
+            {
+                int bIndex = a.indexOf('b');
+                if (bIndex == -1 || bIndex == 0 || bIndex == a.length() - 1) 
+                {
+                    ans = false;
+                } 
+                else {
+                    String numberPart = a.substring(0, bIndex);
+                    String basePart = a.substring(bIndex + 1);
+                    if (!isValidBase(basePart))
+                    {
+                        ans = false;
+                    } 
+                    else
+                    {
+                        if (!isValidNumber(numberPart, getBase(basePart))) 
+                        {
+                            ans = false;
+                        }
+                    }
+                }
+            }
             return ans;
         }
 
+        
+        /* 
+         * This function returns the integer value of the given base.
+         *  If the base is not valid, the function returns -1. (Added this function to avoid code duplication in isNumber function) 
+         */
+        private static int getBase(String base) {
+            if (base.length() == 1) 
+            {
+                char c = base.charAt(0);
+                if (c >= '2' && c <= '9')
+                { 
+                    return c - '0';
+                }
+                if (c >= 'A' && c <= 'G')
+                {
+                    return c - 'A' + 10;
+                } 
+            }
+            return -1;
+        }
+        
+        /*
+         * This function checks if the given base is valid.
+         * If the base is not valid, the function returns false. (Added this function to account for the case where the base is not valid in isNumber function - test)
+         */
+        private static boolean isValidBase(String base) {
+            return getBase(base) != -1;
+        }
+        
+        /*
+         * This function checks if the given number is valid.
+         * If the number is not valid, the function returns false. (Added this function to account for the case where the number is not valid in isNumber function - test)
+         */
+        private static boolean isValidNumber(String number, int base) {
+            for (char c : number.toCharArray()) {
+                int value = Character.digit(c, base); // I used the Character.digit function to get the value of the character in the given base
+                if (value == -1)
+                { 
+                    return false;
+                }
+            }
+            return true;
+        }
         /**
          * Calculate the number representation (in basis base)
          * of the given natural number (represented as an integer).
@@ -47,9 +115,8 @@ public class Ex1 {
          */
         public static String int2Number(int num, int base) {
             String ans = "";
-            // add your code here
+                    
 
-            ////////////////////
             return ans;
         }
 
