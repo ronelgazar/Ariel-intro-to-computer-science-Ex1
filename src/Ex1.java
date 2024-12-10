@@ -22,32 +22,42 @@ public class Ex1 {
      * @param num a String representing a number in basis [2,16]
      * @return
      */
-    public static int number2Int(String num) {
-        if (!isNumber(num)) {
+    public static int number2Int(String num) 
+    {
+        if (!isNumber(num)) 
+        {
             return -1;
         }
         String[] parts = num.split("b");
         int base = 10; // the default base is 10 and is often omitted so I just set it to 10
-        if (parts.length == 2) {
+        if (parts.length == 2) 
+        {
             base = getBase(parts[1]);
         }
-        try { // I am using try and catch to catch the exception if the number is not in the
+        try 
+        { // I am using try and catch to catch the exception if the number is not in the
               // correct format
             return Integer.parseInt(parts[0], base); // This allows me to convert the number to an integer in the given
                                                      // base from getBase function
-        } catch (NumberFormatException e) {
+        } 
+        catch (NumberFormatException e) 
+        {
             return -1;
         }
     }
 
     /**
-     * This static function checks if the given String contains any lowercase letters. - to check for invalid numbers
+     * this is a util function in order to check for invalid numbers
+     * This static function checks if the given String contains any lowercase letters.
      * @param s a String to check
      * @return true if the String contains any lowercase letters, false otherwise
      */
-    private static boolean containsLowerCase(String s) {
-        for (char c : s.toCharArray()) {
-            if (Character.isLowerCase(c)) {
+    private static boolean containsLowerCase(String s) 
+    {
+        for (char c : s.toCharArray()) 
+        {
+            if (Character.isLowerCase(c)) 
+            {
                 return true;
             }
         }
@@ -62,27 +72,34 @@ public class Ex1 {
      * @return true iff the given String is in a number format
      * 
      */
-    public static boolean isNumber(String a) {
+    public static boolean isNumber(String a) 
+    {
         boolean ans = true;
         if (a == null || a.isEmpty()) {
             ans = false;
-        } else {
+        } 
+        else 
+        {
             int bIndex = a.indexOf('b');
-            if (bIndex == -1) {
+            if (bIndex == -1) 
+            {
                 ans = isValidNumber(a, 10); // assuming base 10 so "bA" doesn't need to be written.
-            } else if (bIndex == 0 || bIndex == a.length() - 1) {
+            } 
+            else if (bIndex == 0 || bIndex == a.length() - 1) 
+            {
                 ans = false;
-            } else {
+            } 
+            else 
+            {
                 String numberPart = a.substring(0, bIndex);
                 String basePart = a.substring(bIndex + 1);
-                if (!isValidBase(basePart)) {
+                if (!isValidBase(basePart)) 
+                {
                     ans = false;
-                } else {
-                    if (containsLowerCase(numberPart) || containsLowerCase(basePart)) {
-                        ans = false;
-                    } else if (!isValidNumber(numberPart, getBase(basePart))) {
-                        ans = false;
-                    }
+                } 
+                else if ((containsLowerCase(numberPart) || containsLowerCase(basePart))|| (!isValidNumber(numberPart, getBase(basePart))) )
+                {
+                    ans = false;
                 }
             }
         }
@@ -96,13 +113,16 @@ public class Ex1 {
      * If the base is not valid, the function returns -1. (Added this function to
      * avoid code duplication in isNumber function)
      */
-    private static int getBase(String base) {
+    private static int getBase(String base) 
+    {
         if (base.length() == 1) {
             char c = base.charAt(0);
-            if (c >= '2' && c <= '9') {
+            if (c >= '2' && c <= '9') 
+            {
                 return c - '0';
             }
-            if (c >= 'A' && c <= 'G') {
+            if (c >= 'A' && c <= 'G') 
+            {
                 return c - 'A' + 10;
             }
         }
@@ -119,12 +139,15 @@ public class Ex1 {
      * The char representation of the base value. If the base is not within the
      * valid range, (' ') is returned.
      */
-    private static char getBaseChar(int base) {
+    private static char getBaseChar(int base) 
+    {
         char ans = ' ';
-        if (base >= 2 && base <= 9) {
+        if (base >= 2 && base <= 9) 
+        {
             ans = (char) ('0' + base);
         }
-        if (base >= 10 && base <= 16) {
+        if (base >= 10 && base <= 16) 
+        {
             ans = (char) ('A' + base - 10);
         }
 
@@ -137,7 +160,8 @@ public class Ex1 {
      * (Added this function to account for the case where the base is not valid in
      * isNumber function - test)
      */
-    private static boolean isValidBase(String base) {
+    private static boolean isValidBase(String base) 
+    {
         return getBase(base) != -1;
     }
 
@@ -147,11 +171,14 @@ public class Ex1 {
      * to account for the case where the number is not valid in isNumber function -
      * test)
      */
-    private static boolean isValidNumber(String number, int base) {
-        for (char c : number.toCharArray()) {
+    private static boolean isValidNumber(String number, int base) 
+    {
+        for (char c : number.toCharArray()) 
+        {
             int value = Character.digit(c, base); // I used the Character.digit function to get the value of the
                                                   // character in the given base
-            if (value == -1) {
+            if (value == -1) 
+            {
                 return false;
             }
         }
@@ -169,9 +196,11 @@ public class Ex1 {
      * @return a String representing a number (in base) equals to num, or an empty
      *         String (in case of wrong input).
      */
-    public static String int2Number(int num, int base) {
+    public static String int2Number(int num, int base) 
+    {
         String ans = "";
-        if (!(num < 0 || base < 2 || base > 16)) {
+        if (!(num < 0 || base < 2 || base > 16)) 
+        {
             ans = Integer.toString(num, base).toUpperCase() + "b" + getBaseChar(base);
         }
 
@@ -185,14 +214,19 @@ public class Ex1 {
      * @param n2 second number
      * @return true iff the two numbers have the same values.
      */
-    public static boolean equals(String n1, String n2) {
+    public static boolean equals(String n1, String n2) 
+    {
         boolean ans = true;
-        if (!isNumber(n1) || !isNumber(n2)) {
+        if (!isNumber(n1) || !isNumber(n2)) 
+        {
             ans = false;
-        } else {
+        } 
+        else 
+        {
             int num1 = number2Int(n1);
             int num2 = number2Int(n2);
-            if (num1 != num2) {
+            if (num1 != num2) 
+            {
                 ans = false;
             }
         }
@@ -210,12 +244,15 @@ public class Ex1 {
      * @return the index in the array in with the largest number (in value).
      *
      */
-    public static int maxIndex(String[] arr) {
+    public static int maxIndex(String[] arr) 
+    {
         int maxIndex = -1;
         int maxValue = Integer.MIN_VALUE;
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) 
+        {
             int value = number2Int(arr[i]);
-            if (value > maxValue) {
+            if (value > maxValue) 
+            {
                 maxValue = value;
                 maxIndex = i;
             }
