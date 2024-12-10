@@ -23,7 +23,10 @@ public class Ex1 {
                 return -1;
             } 
             String[] parts = num.split("b");
-            int base = getBase(parts[1]);
+            int base = 10; // the default base is 10 and is often omitted so I just set it to 10 
+            if (parts.length == 2) {
+                base = getBase(parts[1]);
+            }
             try 
             { //I am using try and catch to catch the exception if the number is not in the correct format
                 return Integer.parseInt(parts[0], base); //This allows me to convert the number to an integer in the given base from getBase function
@@ -49,7 +52,11 @@ public class Ex1 {
             else 
             {
                 int bIndex = a.indexOf('b');
-                if (bIndex == -1 || bIndex == 0 || bIndex == a.length() - 1) 
+                if (bIndex == -1)
+                {
+                    ans = isValidNumber(a, 10); //assuming base 10 so "bA" doesn't need to be written.
+                }
+                else if(bIndex == 0 || bIndex == a.length() - 1)
                 {
                     ans = false;
                 } 
