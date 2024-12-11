@@ -1,4 +1,4 @@
-# Ex1 - Number Formatting Converter and Calculator
+# Ex1
 
 ## Overview
 
